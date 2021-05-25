@@ -9,13 +9,15 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      bounds: []
+      bounds: [],
+      error: ""
     }
   }
 
-  setRange = (lowerBound, upperBound) => {
+  setRange = (lowerBound, upperBound, error) => {
     console.log(lowerBound, upperBound)
     this.setState({ bounds: [lowerBound, upperBound] })
+    this.setState({ error: error })
   }
 
   render() {
@@ -23,7 +25,14 @@ class App extends Component {
       <div className="App">
         <header className="App-header"></header>
         <SetRange setRange={this.setRange} />
-        {this.state.bounds.length === 2 ? <p>Your guess should be between {this.state.bounds[0]} and {this.state.bounds[1]}.</p> : <p>Please set the lower and upper bounds.</p>}
+        {(this.state.bounds.length === 2 & this.state.error !== "") ? (
+          <p>
+            Your guess should be between {this.state.bounds[0]} and{" "}
+            {this.state.bounds[1]}.
+          </p>
+        ) : (
+          <p>Please set the lower and upper bounds.</p>
+        )}
         <MakeGuess />
         <MakeGuess />
         <Button />
