@@ -5,10 +5,15 @@ import Score from "./Score"
 import "./App.css"
 
 function App() {
+
+  const setRange = (lowerBound, upperBound) => {
+    console.log(lowerBound, upperBound)
+  }
+
   return (
     <div className="App">
       <header className="App-header"></header>
-      <SetRange />
+      <SetRange setRange={setRange}/>
       <MakeGuess />
       <MakeGuess />
       <Button />
