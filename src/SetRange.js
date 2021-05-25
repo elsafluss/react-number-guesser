@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react"
+import React, { Component } from "react"
 
 class SetRange extends Component {
   constructor() {
@@ -15,6 +15,8 @@ class SetRange extends Component {
 
   getRange = (event) => {
       event.preventDefault()
+      // handle error if lowerBound is higher than higherBound
+      // maybe say "did you mean lowX, highX?"
       this.props.setRange(this.state.lowerBound, this.state.upperBound)
   }
 
