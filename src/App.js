@@ -1,47 +1,49 @@
-import React, { Component } from "react"
+import React, { useState } from "react"
 import SetRange from "./SetRange"
 import MakeGuess from "./MakeGuess"
 import Button from "./Button"
 import Score from "./Score"
 import "./App.css"
 
-class App extends Component {
-  constructor() {
-    super()
-    this.state = {
-      bounds: [],
-      error: ""
+const App = () => {
+  const [lowerBound, setLowerBound] = useState(0)
+  const [upperBound, setUpperBound] = useState(999)
+  const [bounds, setBounds] = useState([])
+  const [error, setError] = useState("")
+
+  const setRange = (lowerBound, upperBound) => {
+    console.log(lowerBound, upperBound)
+    setLowerBound(lowerBound)
+    setUpperBound(upperBound)
+    setBounds(lowerBound, upperBound)
+
+    if (lowerBound === upperBound) {
+      setError("Please choose numbers that are different from one another.")
+    }
+    if (lowerBound > upperBound) {
+      setError("Please choose a lower bound that is lower than the upper bound.")
     }
   }
 
-  setRange = (lowerBound, upperBound, error) => {
-    console.log(lowerBound, upperBound)
-    this.setState({ bounds: [lowerBound, upperBound] })
-    this.setState({ error: error })
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header"></header>
-        <SetRange setRange={this.setRange} />
-        {(this.state.bounds.length === 2 & this.state.error !== "") ? (
-          <p>
-            Your guess should be between {this.state.bounds[0]} and{" "}
-            {this.state.bounds[1]}.
-          </p>
-        ) : (
-          <p>Please set the lower and upper bounds.</p>
-        )}
-        <MakeGuess />
-        <MakeGuess />
-        <Button />
-        <Button />
-        <Button />
-        <Score />
-      </div>
-    )
-  }
+  return (
+    <div className="App">
+      <header className="App-header"></header>
+      <SetRange setRange={setRange} />
+      {(bounds.length !== 2) & (error !== "") ? (
+        <p>
+          Your guess should be between {lowerBound} and {upperBound}.
+        </p>
+      ) : (
+        <p>Please set the lower and upper bounds.</p>
+      )}
+      <MakeGuess />
+      <MakeGuess />
+      <Button />
+      <Button />
+      <Button />
+      <Score />
+    </div>
+  )
 }
 
 export default App

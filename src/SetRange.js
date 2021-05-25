@@ -5,33 +5,18 @@ class SetRange extends Component {
     super()
     this.state = {
       lowerBound: 0,
-      upperBound: 999,
-      error: "",
+      upperBound: 999
     }
   }
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: Number(event.target.value) })
-    this.setState({ error: "" })
-  }
-
-  getRange = (event) => {
-    event.preventDefault()
-    if (this.state.lowerBound === this.state.upperBound) {
-      this.setState({
-        error: "Please choose numbers that are different from one another.",
-      })
-    }
-    if (this.state.lowerBound > this.state.upperBound) {
-      this.setState({
-        error:
-          "Please choose a lower bound that is lower than the upper bound.",
-      })
-    }
-    this.props.setRange(this.state.lowerBound, this.state.upperBound, this.state.error)
   }
 
   render() {
+      let lowerBound = this.state.lowerBound
+      let upperBound = this.state.upperBound
+
     return (
       <>
         <form>
@@ -52,11 +37,14 @@ class SetRange extends Component {
           ></input>
           <br></br>
           <br></br>
-          <button type="submit" onClick={this.getRange}>
+          <button
+            type="submit"
+            onSubmit={this.props.setRange(lowerBound, upperBound)}
+          >
             Set Range
           </button>
         </form>
-        <error>{this.state.error}</error>
+        <p>{this.state.error}</p>
       </>
     )
   }
