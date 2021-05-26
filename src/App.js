@@ -48,7 +48,6 @@ const App = () => {
         <p>Please set the lower and upper bounds.</p>
       )}
       <MakeGuess />
-      <MakeGuess />
       <Button />
       <Button />
       <Button />
