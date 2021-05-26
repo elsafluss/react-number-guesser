@@ -6,15 +6,16 @@ const SetRange = ({ getRange }) => {
 
   const handleChange = (event) => {
     if (event.target.name === "lowerBound") {
-      setLowerBound(event.target.value)
+      setLowerBound(Number(event.target.value))
     } else {
-      setUpperBound(event.target.value)
+      setUpperBound(Number(event.target.value))
     }
   }
 
   const getInputs = (event) => {
     event.preventDefault()
     getRange(lowerBound, upperBound)
+    
   }
 
   return (

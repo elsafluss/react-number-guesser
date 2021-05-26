@@ -10,16 +10,20 @@ const App = () => {
   const [upperBound, setUpperBound] = useState(999)
   const [bounds, setBounds] = useState([])
   const [error, setError] = useState("")
-  // const [range, setRange] = useState([])
 
   useEffect(() => {
     getRange(lowerBound, upperBound)
   })
 
   const getRange = (lowerBound, upperBound) => {
-
     console.log(lowerBound, upperBound)
+    checkRange(lowerBound, upperBound)
+    setLowerBound(lowerBound)
+    setUpperBound(upperBound)
+    setBounds(lowerBound, upperBound)
+  }
 
+  const checkRange = (lowerBound, upperBound) => {
     if (lowerBound === upperBound) {
       setError("Please choose numbers that are different from one another.")
     } else if (lowerBound > upperBound) {
@@ -27,9 +31,7 @@ const App = () => {
         "Please choose a lower bound that is lower than the upper bound."
       )
     } else {
-      setLowerBound(lowerBound)
-      setUpperBound(upperBound)
-      setBounds(lowerBound, upperBound)
+      setError("")
     }
   }
 
@@ -37,14 +39,14 @@ const App = () => {
     <div className="App">
       <header className="App-header"></header>
       <SetRange getRange={getRange} />
-      {(bounds.length !== 2) & (error !== "") ? (
+      <p>{error}</p>
+      {(!bounds.length & !error) ? (
         <p>
           Your guess should be between {lowerBound} and {upperBound}.
         </p>
       ) : (
         <p>Please set the lower and upper bounds.</p>
       )}
-      <p>{error}</p>
       <MakeGuess />
       <MakeGuess />
       <Button />
