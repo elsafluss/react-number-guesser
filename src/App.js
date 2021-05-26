@@ -16,7 +16,7 @@ const App = () => {
   })
 
   const getRange = (lowerBound, upperBound) => {
-    console.log(lowerBound, upperBound)
+    // console.log(lowerBound, upperBound)
     checkRange(lowerBound, upperBound)
     setLowerBound(lowerBound)
     setUpperBound(upperBound)

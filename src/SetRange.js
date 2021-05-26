@@ -15,7 +15,6 @@ const SetRange = ({ getRange }) => {
   const getInputs = (event) => {
     event.preventDefault()
     getRange(lowerBound, upperBound)
-    
   }
 
   return (
@@ -28,6 +27,7 @@ const SetRange = ({ getRange }) => {
           value={lowerBound}
           onChange={(event) => handleChange(event)}
         ></input>
+        <br></br>
         <br></br>
         <label>Upper Bound </label>
         <input
