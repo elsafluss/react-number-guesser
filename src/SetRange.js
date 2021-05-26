@@ -1,53 +1,48 @@
-import React, { Component } from "react"
+import React, { useState } from "react"
 
-class SetRange extends Component {
-  constructor() {
-    super()
-    this.state = {
-      lowerBound: 0,
-      upperBound: 999
+const SetRange = ({ getRange }) => {
+  const [lowerBound, setLowerBound] = useState(0)
+  const [upperBound, setUpperBound] = useState(999)
+
+  const handleChange = (event) => {
+    if (event.target.name === "lowerBound") {
+      setLowerBound(event.target.value)
+    } else {
+      setUpperBound(event.target.value)
     }
   }
 
-  handleChange = (event) => {
-    this.setState({ [event.target.name]: Number(event.target.value) })
+  const getInputs = (event) => {
+    event.preventDefault()
+    getRange(lowerBound, upperBound)
   }
 
-  render() {
-      let lowerBound = this.state.lowerBound
-      let upperBound = this.state.upperBound
-
-    return (
-      <>
-        <form>
-          <label>Lower Bound </label>
-          <input
-            type="number"
-            name="lowerBound"
-            value={this.state.lowerBound}
-            onChange={(event) => this.handleChange(event)}
-          ></input>
-          <br></br>
-          <label>Upper Bound </label>
-          <input
-            type="number"
-            name="upperBound"
-            value={this.state.upperBound}
-            onChange={(event) => this.handleChange(event)}
-          ></input>
-          <br></br>
-          <br></br>
-          <button
-            type="submit"
-            onSubmit={this.props.setRange(lowerBound, upperBound)}
-          >
-            Set Range
-          </button>
-        </form>
-        <p>{this.state.error}</p>
-      </>
-    )
-  }
+  return (
+    <>
+      <form>
+        <label>Lower Bound </label>
+        <input
+          type="number"
+          name="lowerBound"
+          value={lowerBound}
+          onChange={(event) => handleChange(event)}
+        ></input>
+        <br></br>
+        <label>Upper Bound </label>
+        <input
+          type="number"
+          name="upperBound"
+          value={upperBound}
+          onChange={(event) => handleChange(event)}
+        ></input>
+        <br></br>
+        <br></br>
+        <button type="submit" onClick={(event) => getInputs(event)}>
+          Set Range
+        </button>
+      </form>
+    </>
+  )
 }
 
 export default SetRange
