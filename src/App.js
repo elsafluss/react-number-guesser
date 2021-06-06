@@ -13,6 +13,7 @@ const App = () => {
 
   useEffect(() => {
     getRange(lowerBound, upperBound)
+    // set random number between bounds
   })
 
   const getRange = (lowerBound, upperBound) => {
